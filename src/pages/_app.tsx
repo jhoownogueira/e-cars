@@ -3,6 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "@/styles/themes/default";
 import { GlobalStyles } from "@/styles/global";
 import React from "react";
+import { AlertsContainers } from "@/utils/AlertsContainers";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 type ComponentWithPageLayout = AppProps & {
   Component: AppProps["Component"] & {
@@ -12,16 +14,19 @@ type ComponentWithPageLayout = AppProps & {
 
 export default function App({ Component, pageProps }: ComponentWithPageLayout) {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <GlobalStyles />
+    <AuthContextProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <GlobalStyles />
 
-      {Component.PageLayout ? (
-        <Component.PageLayout>
+        {Component.PageLayout ? (
+          <Component.PageLayout>
+            <Component {...pageProps} />
+          </Component.PageLayout>
+        ) : (
           <Component {...pageProps} />
-        </Component.PageLayout>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </ThemeProvider>
+        )}
+        <AlertsContainers />
+      </ThemeProvider>
+    </AuthContextProvider>
   );
 }

@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   body {
     -webkit-font-smoothing: antialiased;
-    background: ${(props) => props.theme["orion_white"]};
+    background: ${(props) => props.theme["orion_black"]};
   }
   body, input, textarea, button {
     font-family: 'Inter', sans-serif;
